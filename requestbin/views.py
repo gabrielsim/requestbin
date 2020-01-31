@@ -1,5 +1,5 @@
 import urllib
-from flask import session, redirect, url_for, escape, request, render_template, make_response
+from flask import session, redirect, url_for, escape, request, render_template, make_response, jsonify
 
 from requestbin import app, db
 
@@ -46,7 +46,7 @@ def bin(name):
             base_url=request.scheme+'://'+request.host)
     else:
         db.create_request(bin, request)
-        resp = make_response("ok\n")
+        resp = make_response(jsonify(status='ok'))
         return resp
 
 
